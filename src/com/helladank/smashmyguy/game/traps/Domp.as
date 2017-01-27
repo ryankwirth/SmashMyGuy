@@ -47,10 +47,10 @@ package com.helladank.smashmyguy.game.traps
 				case DompStatus.DOMP_READY:
 					break;
 				case DompStatus.DOMP_FALLING:
-					_currentY -= FALL_SPEED;
+					_currentY += FALL_SPEED;
 					break;
 				case DompStatus.DOMP_CHARGING:
-					_currentY += CHARGE_SPEED;
+					_currentY -= CHARGE_SPEED;
 					break;
 				case DompStatus.DOMP_WAITING:
 					if (_counter > 0) {
