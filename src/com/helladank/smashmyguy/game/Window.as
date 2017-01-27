@@ -1,6 +1,8 @@
 package com.helladank.smashmyguy.game 
 {
 	import com.helladank.smashmyguy.game.enemies.Enemy;
+	import com.helladank.smashmyguy.game.enemies.GenericEnemy;
+	import com.helladank.smashmyguy.game.traps.Domp;
 	import com.helladank.smashmyguy.game.traps.Trap;
 	import starling.display.DisplayObject;
 	import starling.display.Image;
@@ -26,18 +28,22 @@ package com.helladank.smashmyguy.game
 			_enemies = new Vector.<Enemy>();
 			
 			addEventListener(EnterFrameEvent.ENTER_FRAME, tick);
+			
+			var domp:Domp = new Domp(height);
+			domp.x = width / 2 - domp.width / 2;
+			addChild(domp);
 		}
 		
 		public function tick(e:EnterFrameEvent):void
 		{
-			var i;
+			var i:int;
 			for (i = 0; i < _traps.length; i++) _traps[i].tick();
 			for (i = 0; i < _enemies.length; i++) _enemies[i].tick();
 		}
 		
 		public function addEnemy():void
 		{
-			var enemy:Enemy = new Enemy( -64);
+			var enemy:Enemy = new GenericEnemy( -64);
 			_enemies.push(enemy);
 			addChild(enemy);
 		}
@@ -52,7 +58,7 @@ package com.helladank.smashmyguy.game
 		{
 			removeEventListener(EnterFrameEvent.ENTER_FRAME, tick);
 			
-			var i;
+			var i:int;
 			for (i = 0; i < _enemies.length; i++) _enemies[i].destroy();
 			for (i = 0; i < _traps.length; i++) _traps[i].destroy();
 			
