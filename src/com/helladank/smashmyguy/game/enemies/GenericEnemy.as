@@ -13,6 +13,11 @@ package com.helladank.smashmyguy.game.enemies
 			
 		}
 		
+		public function destroy():void
+		{
+			removeFromParent(true);
+		}
+		
 	}
 
 }
