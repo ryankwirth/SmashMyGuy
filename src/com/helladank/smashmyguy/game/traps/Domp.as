@@ -1,6 +1,7 @@
 package com.helladank.smashmyguy.game.traps 
 {
 	import com.helladank.smashmyguy.IDestructible;
+	import flash.display.Bitmap;
 	import starling.display.Image;
 	import starling.textures.Texture;
 	/**
@@ -9,18 +10,24 @@ package com.helladank.smashmyguy.game.traps
 	 */
 	public class Domp extends Image implements Trap, IDestructible
 	{
+		// Embedding image for Domp
+		[Embed(source = "Domp.png")]
+		public static const Domp:Class;
+		
+		private var _texture:Texture = Texture.fromEmbeddedAsset(Domp);
+		
 		private var _status:DompStatus;
 		private var _maxY:Number;
 		private var _counter:Number;
 		private const CHARGE_TIME:Number = 5;
 		private const WAIT_TIME:Number = 5;
-		private const FALL_SPEED:Number = 10;
+		private const FALL_SPEED:Number = 20;
 		private const WAIT_SPEED:Number = 1;
 		private const CHARGE_SPEED:Number = 7;
 		
 		public function Domp(maxY:int) 
 		{
-			super(Texture.fromColor(96, 96, 0xFF6600));
+			super(_texture);
 			
 			_maxY = maxY;
 			_status = DompStatus.DOMP_READY;
@@ -42,7 +49,7 @@ package com.helladank.smashmyguy.game.traps
 					if (y >= _maxY)
 					{
 						y = _maxY;
-						_counter = 30;
+						_counter = WAIT_TIME;
 						_status = DompStatus.DOMP_WAITING;
 					}
 					break;
@@ -53,6 +60,9 @@ package com.helladank.smashmyguy.game.traps
 						y = 0;
 						_status = DompStatus.DOMP_READY;
 					}
+					break;
+				case DompStatus.DOMP_CHARGING:
+					y -= CHARGE_SPEED;
 					break;
 				case DompStatus.DOMP_WAITING:
 					if (_counter > 0) {
