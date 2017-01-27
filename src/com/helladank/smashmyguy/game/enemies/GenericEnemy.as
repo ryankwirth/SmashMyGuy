@@ -5,17 +5,11 @@ package com.helladank.smashmyguy.game.enemies
 	 * ...
 	 * @author Ryan Wirth
 	 */
-	public class GenericEnemy extends MovieClip implements Enemy
+	public class GenericEnemy extends Enemy
 	{
-		
-		public function GenericEnemy() 
+		public function GenericEnemy(initialX:int) 
 		{
-			
-		}
-		
-		public function destroy():void
-		{
-			removeFromParent(true);
+			super(initialX);
 		}
 		
 	}
