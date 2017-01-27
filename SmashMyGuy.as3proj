@@ -5,9 +5,9 @@
     <movie outputType="Application" />
     <movie input="" />
     <movie path="bin\SmashMyGuy.swf" />
-    <movie fps="30" />
-    <movie width="480" />
-    <movie height="800" />
+    <movie fps="60" />
+    <movie width="800" />
+    <movie height="480" />
     <movie version="21" />
     <movie minorVersion="0" />
     <movie platform="AIR Mobile" />

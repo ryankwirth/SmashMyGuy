@@ -1,4 +1,4 @@
-package com.helladank.smashmyguy 
+package com.helladank.smashmyguy.game 
 {
 	import starling.display.Sprite;
 	/**
