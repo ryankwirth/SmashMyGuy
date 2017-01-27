@@ -1,12 +1,13 @@
 package com.helladank.smashmyguy
 {
-	import flash.desktop.NativeApplication;
-	import flash.events.Event;
+	import com.helladank.smashmyguy.game.Game;
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
 	import flash.ui.Multitouch;
 	import flash.ui.MultitouchInputMode;
+	import starling.core.Starling;
+	import starling.events.Event;
 	
 	/**
 	 * ...
@@ -14,24 +15,25 @@ package com.helladank.smashmyguy
 	 */
 	public class Main extends Sprite 
 	{
+		private var _starling:Starling;
 		
 		public function Main() 
 		{
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			stage.align = StageAlign.TOP_LEFT;
-			stage.addEventListener(Event.DEACTIVATE, deactivate);
 			
 			// touch or gesture?
 			Multitouch.inputMode = MultitouchInputMode.TOUCH_POINT;
 			
-			// Entry point
-			// New to AIR? Please read *carefully* the readme.txt files!
+			// Begin Starling
+			_starling = new Starling(Game, stage);
+			_starling.addEventListener(Event.ROOT_CREATED, onRootCreated);
+			_starling.start();
 		}
 		
-		private function deactivate(e:Event):void 
+		private function onRootCreated(e:Event, g:Game):void
 		{
-			// make sure the app behaves well (or exits) when in background
-			//NativeApplication.nativeApplication.exit();
+			g.start(stage.fullScreenWidth, stage.fullScreenHeight);
 		}
 		
 	}
