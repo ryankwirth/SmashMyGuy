@@ -1,17 +1,26 @@
 package com.helladank.smashmyguy.game.traps 
 {
 	import com.helladank.smashmyguy.IDestructible;
+	import flash.display.Bitmap;
 	import starling.display.Image;
+	import starling.textures.Texture;
 	/**
 	 * ...
 	 * @author Ryan Wirth
 	 */
-	public class Domp extends Image implements Trap implements IDestructible
+	public class Domp extends Image implements Trap, IDestructible
 	{
+		// Embedding image for Domp
+		[Embed(source = "/domp.png")]
+		public static const Domp:Class;
+		
+		var texture:Texture = Texture.fromEmbeddedAsset(Domp);
+		
 		private var _status:DompStatus;
 		private var _currentY:Number;
 		private var _maxY:Number;
 		private var _counter:Number;
+		
 		private const CHARGE_TIME:Number;
 		private const WAIT_TIME:Number;
 		private const FALL_SPEED:Number;
@@ -20,29 +29,30 @@ package com.helladank.smashmyguy.game.traps
 		
 		public function Domp(maxY:int) 
 		{
+			super(texture);
 			_maxY = maxY;
 			_status = DompStatus.DOMP_READY;
 			_counter = WAIT_TIME;
 		}
 		
-		private function activate():void;
+		public function activate():void
 		{
 			if (_status = DompStatus.DOMP_READY) 
 			_status = DompStatus.DOMP_FALLING;
 		}
 		
-		private function tick():void
+		public function tick():void
 		{
 			switch(_status) { 
-				DompStatus.DOMP_READY:
+				case DompStatus.DOMP_READY:
 					break;
-				DompStatus.DOMP_FALLING:
+				case DompStatus.DOMP_FALLING:
 					_currentY -= FALL_SPEED;
 					break;
-				DompStatus.DOMP_CHARGING:
+				case DompStatus.DOMP_CHARGING:
 					_currentY += CHARGE_SPEED;
 					break;
-				DompStatus.DOMP_WAITING:
+				case DompStatus.DOMP_WAITING:
 					if (_counter > 0) {
 					_counter -= WAIT_SPEED;
 					} else {
@@ -54,15 +64,14 @@ package com.helladank.smashmyguy.game.traps
 			}
 		}
 		
-		private function get IS_READY():Boolean
+		public function get IS_READY():Boolean
 		{
-			if (_status = DompStatus.DOMP_READY) 
-			return true;
+			return _status == DompStatus.DOMP_READY;
 		}
 		
-		private function destroy():void;
+		public function destroy():void
 		{
-			
+			removeFromParent(true);
 		}
 		
 	}
