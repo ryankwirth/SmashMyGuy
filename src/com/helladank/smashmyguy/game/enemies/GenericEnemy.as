@@ -1,5 +1,6 @@
 package com.helladank.smashmyguy.game.enemies 
 {
+	import com.helladank.smashmyguy.game.Window;
 	import starling.display.MovieClip;
 	/**
 	 * ...
@@ -7,9 +8,9 @@ package com.helladank.smashmyguy.game.enemies
 	 */
 	public class GenericEnemy extends Enemy
 	{
-		public function GenericEnemy(initialX:int) 
+		public function GenericEnemy(window:Window, initialX:int, finalX:int) 
 		{
-			super(initialX);
+			super(window, initialX, finalX);
 		}
 		
 	}
