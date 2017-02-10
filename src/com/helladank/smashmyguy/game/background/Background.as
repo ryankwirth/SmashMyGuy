@@ -61,7 +61,9 @@ package com.helladank.smashmyguy.game.background
 			{
 				for (j = 0; j < numWidth; j++)
 				{
-					tile = new Image(_textureAtlas.getTexture(i == 0 ? "ground_top" : "ground_middle"));
+					var hasEyes:Boolean = Math.random() * 100 < 5;
+					
+					tile = new Image(_textureAtlas.getTexture(i == 0 ? "ground_top" : (hasEyes ? "ground_eyes" : "ground_middle")));
 					tile.textureSmoothing = TextureSmoothing.NONE;
 					tile.x = j * 16;
 					tile.y = _baselineY + i * 16;
@@ -79,7 +81,7 @@ package com.helladank.smashmyguy.game.background
 					lastPillarI = i;
 					
 					// Pillar height is  [3, 6]
-					var pillarHeight:int = Math.floor(Math.random() * 4) + 3;
+					var pillarHeight:int = Math.floor(Math.random() * 5) + 2;
 					
 					for (j = 0; j < pillarHeight; j++)
 					{
@@ -87,6 +89,17 @@ package com.helladank.smashmyguy.game.background
 						tile.textureSmoothing = TextureSmoothing.NONE;
 						tile.x = i * 16;
 						tile.y = _baselineY - (j + 1) * 16;
+						
+						_tilesFullTexture.draw(tile);
+					}
+					
+					var hasLeaningSkeleton:Boolean = Math.random() * 100 < 20;
+					if (hasLeaningSkeleton)
+					{
+						tile = new Image(_textureAtlas.getTexture("skeleton"));
+						tile.textureSmoothing = TextureSmoothing.NONE;
+						tile.x = (i - 1) * 16;
+						tile.y = _baselineY - 1 * 16;
 						
 						_tilesFullTexture.draw(tile);
 					}
@@ -98,11 +111,18 @@ package com.helladank.smashmyguy.game.background
 			{
 				if (Math.random() * 100 < 25)
 				{
-					var chainHeight:int = Math.floor(Math.random() * 5) + 3;
+					var chainHeight:int = Math.floor(Math.random() * 6) + 4;
+					var hasSkeleton:Boolean = Math.random() * 100 < 10;
+					if (hasSkeleton) chainHeight++;
 					
 					for (j = 0; j < chainHeight; j++)
 					{
-						tile = new Image(_textureAtlas.getTexture(j == chainHeight - 1 ? "chain_bottom" : "chain_middle"));
+						var texture:String = "chain_middle";
+						if (hasSkeleton && j == chainHeight - 1) texture = "chain_end_skeleton2";
+						else if (hasSkeleton && j == chainHeight - 2) texture = "chain_end_skeleton";
+						else if (j == chainHeight - 1) texture = "chain_bottom";
+						
+						tile = new Image(_textureAtlas.getTexture(texture));
 						tile.textureSmoothing = TextureSmoothing.NONE;
 						tile.x = i * 16;
 						tile.y = j * 16;
