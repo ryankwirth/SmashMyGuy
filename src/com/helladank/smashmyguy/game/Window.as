@@ -1,5 +1,6 @@
 package com.helladank.smashmyguy.game 
 {
+	import com.helladank.smashmyguy.game.background.Background;
 	import com.helladank.smashmyguy.game.enemies.Enemy;
 	import com.helladank.smashmyguy.game.enemies.GenericEnemy;
 	import com.helladank.smashmyguy.game.traps.Domp;
@@ -23,9 +24,11 @@ package com.helladank.smashmyguy.game
 		private var _traps:Vector.<Trap>;
 		private var _enemies:Vector.<Enemy>;
 		
+		private var _background:Background;
+		
 		public function Window(width:int, height:int) 
 		{
-			_width = width; _height = _baselineY = height;
+			_width = width; _height = height; _baselineY = Math.ceil((height * 0.75) / 16) * 16;
 			_timeToNewEnemy = 0;
 			
 			_traps = new Vector.<Trap>();
@@ -34,7 +37,15 @@ package com.helladank.smashmyguy.game
 			addEventListener(EnterFrameEvent.ENTER_FRAME, tick);
 			addEventListener(TouchEvent.TOUCH, tap);
 			
-			var domp:Domp = new Domp(height - 96);
+			_background = new Background(_width, _height, _baselineY);
+			addChild(_background);
+			
+			createDomp();
+		}
+		
+		public function createDomp():void
+		{
+			var domp:Domp = new Domp(_baselineY - 96);
 			domp.x = width / 2 - domp.width / 2;
 			_traps.push(domp);
 			addChild(domp);

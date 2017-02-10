@@ -4,6 +4,7 @@ package com.helladank.smashmyguy.game.traps
 	import flash.display.Bitmap;
 	import starling.display.Image;
 	import starling.textures.Texture;
+	import starling.textures.TextureSmoothing;
 	/**
 	 * ...
 	 * @author Ryan Wirth
@@ -28,6 +29,8 @@ package com.helladank.smashmyguy.game.traps
 		public function Domp(maxY:int) 
 		{
 			super(_texture);
+			
+			textureSmoothing = TextureSmoothing.NONE;
 			
 			_maxY = maxY;
 			_status = DompStatus.DOMP_READY;
