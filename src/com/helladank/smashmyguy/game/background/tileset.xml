@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:1ea882627509407a1693f5e69f8194a1:06a8e7b292923f48f0023a77d943d13b:d7401919751674bc64fc25f13a4e8410$ -->
+<TextureAtlas imagePath="tileset.png" width="128" height="128">
+    <SubTexture name="chain_bottom" x="4" y="4" width="10" height="15" frameX="-3" frameY="0" frameWidth="16" frameHeight="16"/>
+    <SubTexture name="chain_end_skeleton" x="36" y="4" width="11" height="16" frameX="-2" frameY="0" frameWidth="16" frameHeight="16"/>
+    <SubTexture name="chain_end_skeleton2" x="72" y="4" width="14" height="14" frameX="0" frameY="0" frameWidth="16" frameHeight="16"/>
+    <SubTexture name="chain_middle" x="20" y="4" width="10" height="16" frameX="-3" frameY="0" frameWidth="16" frameHeight="16"/>
+    <SubTexture name="ground_eyes" x="92" y="26" width="16" height="16"/>
+    <SubTexture name="ground_middle" x="70" y="26" width="16" height="16"/>
+    <SubTexture name="ground_top" x="48" y="26" width="16" height="16"/>
+    <SubTexture name="pillar_bottom" x="26" y="26" width="16" height="16"/>
+    <SubTexture name="pillar_middle" x="4" y="26" width="16" height="16"/>
+    <SubTexture name="pillar_top" x="92" y="4" width="16" height="16"/>
+    <SubTexture name="skeleton" x="53" y="4" width="13" height="15" frameX="-3" frameY="-1" frameWidth="16" frameHeight="16"/>
+</TextureAtlas>

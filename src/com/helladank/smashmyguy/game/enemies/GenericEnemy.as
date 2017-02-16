@@ -1,21 +1,16 @@
 package com.helladank.smashmyguy.game.enemies 
 {
+	import com.helladank.smashmyguy.game.Window;
 	import starling.display.MovieClip;
 	/**
 	 * ...
 	 * @author Ryan Wirth
 	 */
-	public class GenericEnemy extends MovieClip implements Enemy
+	public class GenericEnemy extends Enemy
 	{
-		
-		public function GenericEnemy() 
+		public function GenericEnemy(window:Window, initialX:int, finalX:int) 
 		{
-			
-		}
-		
-		public function destroy():void
-		{
-			removeFromParent(true);
+			super(window, initialX, finalX);
 		}
 		
 	}

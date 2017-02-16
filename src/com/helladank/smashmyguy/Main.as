@@ -4,6 +4,7 @@ package com.helladank.smashmyguy
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
+	import flash.geom.Rectangle;
 	import flash.ui.Multitouch;
 	import flash.ui.MultitouchInputMode;
 	import starling.core.Starling;
@@ -26,14 +27,19 @@ package com.helladank.smashmyguy
 			Multitouch.inputMode = MultitouchInputMode.TOUCH_POINT;
 			
 			// Begin Starling
-			_starling = new Starling(Game, stage);
+			var viewPort:Rectangle = new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight);
+			
+			_starling = new Starling(Game, stage, viewPort);
 			_starling.addEventListener(Event.ROOT_CREATED, onRootCreated);
 			_starling.start();
 		}
 		
 		private function onRootCreated(e:Event, g:Game):void
 		{
-			g.start(stage.fullScreenWidth, stage.fullScreenHeight);
+			_starling.stage.stageWidth = stage.fullScreenWidth / 2;
+			_starling.stage.stageHeight = stage.fullScreenHeight / 2;
+			
+			g.start(_starling.stage.stageWidth, _starling.stage.stageHeight);
 		}
 		
 	}
