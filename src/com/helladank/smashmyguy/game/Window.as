@@ -68,6 +68,26 @@ package com.helladank.smashmyguy.game
 			var i:int;
 			for (i = 0; i < _traps.length; i++) _traps[i].tick();
 			for (i = 0; i < _enemies.length; i++) _enemies[i].tick();
+			
+			checkCollisions();
+		}
+		
+		public function checkCollisions():void
+		{
+			var trap:Trap;
+			var enemy:Enemy;
+			for (var i:int = 0; i < _traps.length; i++)
+			{
+				trap = _traps[i];
+				for (var j:int = 0; j < _enemies.length; j++)
+				{
+					enemy = _enemies[j];
+					
+					if (!enemy.IS_ALIVE) continue;
+					
+					_traps[i].checkCollision(_enemies[j]);
+				}
+			}
 		}
 		
 		public function addEnemy():void
@@ -81,7 +101,6 @@ package com.helladank.smashmyguy.game
 		public function removeEnemy(enemy:Enemy):void
 		{
 			for (var i:int = 0; i < _enemies.length; i++) if (_enemies[i] == enemy) { _enemies.splice(i, 1); break; }
-			enemy.destroy();
 		}
 		
 		public function destroy():void

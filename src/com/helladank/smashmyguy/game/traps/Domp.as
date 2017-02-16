@@ -1,7 +1,9 @@
 package com.helladank.smashmyguy.game.traps 
 {
 	import com.helladank.smashmyguy.IDestructible;
+	import com.helladank.smashmyguy.game.enemies.Enemy;
 	import flash.display.Bitmap;
+	import flash.geom.Point;
 	import starling.display.Image;
 	import starling.textures.Texture;
 	import starling.textures.TextureSmoothing;
@@ -77,6 +79,23 @@ package com.helladank.smashmyguy.game.traps
 					break;
 				
 			}
+		}
+		
+		public function checkCollision(enemy:Enemy):void
+		{
+			// Only check collisions when we're falling
+			if (!_status == DompStatus.DOMP_FALLING) return;
+			
+			var distX:int = Math.abs(enemy.x - this.x);
+			
+			// If the enemy and this trap are far away, don't bother checking further
+			if (distX > this.width * 2) return;
+			
+			// Check the bounding boxes
+			if (!enemy.bounds.intersects(this.bounds)) return;
+			
+			// The bounding boxes are intersecting, check by pixel
+			enemy.kill();
 		}
 		
 		public function get IS_READY():Boolean

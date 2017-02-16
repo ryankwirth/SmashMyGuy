@@ -1,5 +1,6 @@
 package com.helladank.smashmyguy.game.traps 
 {
+	import com.helladank.smashmyguy.game.enemies.Enemy;
 	
 	/**
 	 * ...
@@ -13,6 +14,8 @@ package com.helladank.smashmyguy.game.traps
 		function get IS_READY():Boolean;
 		
 		function destroy():void;
+		
+		function checkCollision(enemy:Enemy):void;
 	}
 	
 }

@@ -36,8 +36,8 @@ package com.helladank.smashmyguy
 		
 		private function onRootCreated(e:Event, g:Game):void
 		{
-			_starling.stage.stageWidth = stage.fullScreenWidth / 2;
-			_starling.stage.stageHeight = stage.fullScreenHeight / 2;
+			_starling.stage.stageWidth = stage.fullScreenWidth / 1;
+			_starling.stage.stageHeight = stage.fullScreenHeight / 1;
 			
 			g.start(_starling.stage.stageWidth, _starling.stage.stageHeight);
 		}

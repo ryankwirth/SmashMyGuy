@@ -21,9 +21,22 @@ package com.helladank.smashmyguy.game
 		public function start(stageWidth:int, stageHeight:int):void
 		{
 			_stageWidth = stageWidth; _stageHeight = stageHeight;
+			var wX:int = _stageWidth / 2;
+			var wY:int = _stageHeight / 2;
 			
-			var window:Window = new Window(_stageWidth, _stageHeight);
+			addWindow(0, 0, wX, wY);
+			addWindow(wX, 0, wX, wY);
+			addWindow(0, wY, wX, wY);
+			addWindow(wX, wY, wX, wY);
+		}
+		
+		private function addWindow(xPos:int, yPos:int, width:int, height:int):void
+		{
+			var window:Window = new Window(width, height);
+			window.x = xPos; window.y = yPos;
 			addChild(window);
+			
+			_windows.push(window);
 		}
 		
 	}
