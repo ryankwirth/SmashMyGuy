@@ -18,6 +18,9 @@ package com.helladank.smashmyguy
 	{
 		private var _starling:Starling;
 		
+		private var _viewPortWidth:int = 800;
+		private var _viewPortHeight:int = 480;
+		
 		public function Main() 
 		{
 			stage.scaleMode = StageScaleMode.NO_SCALE;
@@ -27,7 +30,7 @@ package com.helladank.smashmyguy
 			Multitouch.inputMode = MultitouchInputMode.TOUCH_POINT;
 			
 			// Begin Starling
-			var viewPort:Rectangle = new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight);
+			var viewPort:Rectangle = new Rectangle(0, 0, _viewPortWidth, _viewPortHeight);
 			
 			_starling = new Starling(Game, stage, viewPort);
 			_starling.addEventListener(Event.ROOT_CREATED, onRootCreated);
@@ -36,8 +39,10 @@ package com.helladank.smashmyguy
 		
 		private function onRootCreated(e:Event, g:Game):void
 		{
-			_starling.stage.stageWidth = stage.fullScreenWidth / 1;
-			_starling.stage.stageHeight = stage.fullScreenHeight / 1;
+			//_starling.stage.stageWidth = stage.fullScreenWidth / 1;
+			//_starling.stage.stageHeight = stage.fullScreenHeight / 1;
+			
+			trace("[Display] ", _starling.stage.stageWidth, _starling.stage.stageHeight);
 			
 			g.start(_starling.stage.stageWidth, _starling.stage.stageHeight);
 		}

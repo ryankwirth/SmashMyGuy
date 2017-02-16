@@ -5,10 +5,8 @@ package com.helladank.smashmyguy.game
 	import com.helladank.smashmyguy.game.enemies.GenericEnemy;
 	import com.helladank.smashmyguy.game.traps.Domp;
 	import com.helladank.smashmyguy.game.traps.Trap;
-	import starling.display.DisplayObject;
-	import starling.display.Image;
+	import flash.events.MouseEvent;
 	import starling.display.Sprite;
-	import starling.textures.Texture;
 	import starling.events.EnterFrameEvent;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -36,16 +34,19 @@ package com.helladank.smashmyguy.game
 			
 			addEventListener(EnterFrameEvent.ENTER_FRAME, tick);
 			addEventListener(TouchEvent.TOUCH, tap);
+			addEventListener(MouseEvent.CLICK, click);
 			
 			_background = new Background(_width, _height, _baselineY);
 			addChild(_background);
+			
+			trace("ADD WINDOW");
 			
 			createDomp();
 		}
 		
 		public function createDomp():void
 		{
-			var domp:Domp = new Domp(_baselineY - 96);
+			var domp:Domp = new Domp(_baselineY - 79);
 			domp.x = width / 2 - domp.width / 2;
 			_traps.push(domp);
 			addChild(domp);
@@ -54,6 +55,11 @@ package com.helladank.smashmyguy.game
 		public function tap(e:TouchEvent):void
 		{
 			if (e.getTouches(this, TouchPhase.BEGAN).length == 0) return;
+			for (var i:int = 0; i < _traps.length; i++) _traps[i].activate();
+		}
+		
+		public function click(e:MouseEvent):void
+		{
 			for (var i:int = 0; i < _traps.length; i++) _traps[i].activate();
 		}
 		

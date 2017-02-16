@@ -2,6 +2,7 @@ package com.helladank.smashmyguy.game
 {
 	import starling.display.Sprite;
 	import starling.text.TextField;
+	import starling.events.TouchEvent;
 	/**
 	 * ...
 	 * @author Ryan Wirth

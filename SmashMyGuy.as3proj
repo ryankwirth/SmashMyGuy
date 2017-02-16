@@ -8,10 +8,11 @@
     <movie fps="60" />
     <movie width="800" />
     <movie height="480" />
-    <movie version="21" />
+    <movie version="23" />
     <movie minorVersion="0" />
-    <movie platform="AIR Mobile" />
+    <movie platform="Flash Player" />
     <movie background="#FFFFFF" />
+    <movie preferredSDK="Flex 4.6.0, AIR 24.0;4.6.0, 24.0;" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
@@ -85,7 +86,7 @@
   <!-- Other project options -->
   <options>
     <option showHiddenPaths="False" />
-    <option testMovie="Custom" />
+    <option testMovie="ExternalPlayer" />
     <option testMovieCommand="bat\RunApp.bat" />
   </options>
   <!-- Plugin storage -->
