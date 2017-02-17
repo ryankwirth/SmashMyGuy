@@ -1,5 +1,6 @@
 package com.helladank.smashmyguy.game 
 {
+	import starling.animation.Juggler;
 	import starling.display.Sprite;
 	import starling.text.TextField;
 	import starling.events.TouchEvent;
@@ -9,6 +10,8 @@ package com.helladank.smashmyguy.game
 	 */
 	public class Game extends Sprite
 	{
+		public static var JUGGLER:Juggler;
+		
 		private var _windows:Vector.<Window> = new Vector.<Window>();
 		
 		private var _stageWidth:int;
@@ -21,6 +24,7 @@ package com.helladank.smashmyguy.game
 		
 		public function start(stageWidth:int, stageHeight:int):void
 		{
+			
 			_stageWidth = stageWidth; _stageHeight = stageHeight;
 			var wX:int = _stageWidth / 2;
 			var wY:int = _stageHeight / 2;

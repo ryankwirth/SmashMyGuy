@@ -7,6 +7,7 @@ package com.helladank.smashmyguy
 	import flash.geom.Rectangle;
 	import flash.ui.Multitouch;
 	import flash.ui.MultitouchInputMode;
+	import starling.animation.Juggler;
 	import starling.core.Starling;
 	import starling.events.Event;
 	
@@ -16,7 +17,7 @@ package com.helladank.smashmyguy
 	 */
 	public class Main extends Sprite 
 	{
-		private var _starling:Starling;
+		private static var _starling:Starling;
 		
 		private var _viewPortWidth:int = 800;
 		private var _viewPortHeight:int = 480;
@@ -27,10 +28,12 @@ package com.helladank.smashmyguy
 			stage.align = StageAlign.TOP_LEFT;
 			
 			// touch or gesture?
-			Multitouch.inputMode = MultitouchInputMode.TOUCH_POINT;
+			//Multitouch.inputMode = MultitouchInputMode.TOUCH_POINT;
 			
 			// Begin Starling
 			var viewPort:Rectangle = new Rectangle(0, 0, _viewPortWidth, _viewPortHeight);
+			
+			//Starling.multitouchEnabled = true;
 			
 			_starling = new Starling(Game, stage, viewPort);
 			_starling.addEventListener(Event.ROOT_CREATED, onRootCreated);
@@ -45,6 +48,11 @@ package com.helladank.smashmyguy
 			trace("[Display] ", _starling.stage.stageWidth, _starling.stage.stageHeight);
 			
 			g.start(_starling.stage.stageWidth, _starling.stage.stageHeight);
+		}
+		
+		public static function get JUGGLER():Juggler 
+		{
+			return _starling.juggler;
 		}
 		
 	}

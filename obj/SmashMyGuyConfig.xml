@@ -20,11 +20,11 @@
     </define>
     <define append="true">
       <name>CONFIG::air</name>
-      <value>false</value>
+      <value>true</value>
     </define>
     <define append="true">
       <name>CONFIG::mobile</name>
-      <value>false</value>
+      <value>true</value>
     </define>
     <define append="true">
       <name>CONFIG::desktop</name>

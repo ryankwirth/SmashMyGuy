@@ -10,7 +10,7 @@
     <movie height="480" />
     <movie version="23" />
     <movie minorVersion="0" />
-    <movie platform="Flash Player" />
+    <movie platform="AIR Mobile" />
     <movie background="#FFFFFF" />
     <movie preferredSDK="Flex 4.6.0, AIR 24.0;4.6.0, 24.0;" />
   </output>
@@ -86,7 +86,7 @@
   <!-- Other project options -->
   <options>
     <option showHiddenPaths="False" />
-    <option testMovie="ExternalPlayer" />
+    <option testMovie="Custom" />
     <option testMovieCommand="bat\RunApp.bat" />
   </options>
   <!-- Plugin storage -->

@@ -10,6 +10,7 @@ package com.helladank.smashmyguy.game
 	import starling.events.EnterFrameEvent;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
+	import com.helladank.smashmyguy.Main;
 	/**
 	 * ...
 	 * @author ...
@@ -27,19 +28,16 @@ package com.helladank.smashmyguy.game
 		public function Window(width:int, height:int) 
 		{
 			_width = width; _height = height; _baselineY = Math.ceil((height * 0.75) / 16) * 16;
-			_timeToNewEnemy = 0;
+			_timeToNewEnemy = Math.random() * 60;
 			
 			_traps = new Vector.<Trap>();
 			_enemies = new Vector.<Enemy>();
 			
 			addEventListener(EnterFrameEvent.ENTER_FRAME, tick);
 			addEventListener(TouchEvent.TOUCH, tap);
-			addEventListener(MouseEvent.CLICK, click);
 			
 			_background = new Background(_width, _height, _baselineY);
 			addChild(_background);
-			
-			trace("ADD WINDOW");
 			
 			createDomp();
 		}
@@ -55,11 +53,6 @@ package com.helladank.smashmyguy.game
 		public function tap(e:TouchEvent):void
 		{
 			if (e.getTouches(this, TouchPhase.BEGAN).length == 0) return;
-			for (var i:int = 0; i < _traps.length; i++) _traps[i].activate();
-		}
-		
-		public function click(e:MouseEvent):void
-		{
 			for (var i:int = 0; i < _traps.length; i++) _traps[i].activate();
 		}
 		
@@ -102,11 +95,15 @@ package com.helladank.smashmyguy.game
 			enemy.y = _baselineY - enemy.height;
 			_enemies.push(enemy);
 			addChild(enemy);
+			
+			Main.JUGGLER.add(enemy);
 		}
 		
 		public function removeEnemy(enemy:Enemy):void
 		{
 			for (var i:int = 0; i < _enemies.length; i++) if (_enemies[i] == enemy) { _enemies.splice(i, 1); break; }
+		
+			Main.JUGGLER.remove(enemy);
 		}
 		
 		public function destroy():void

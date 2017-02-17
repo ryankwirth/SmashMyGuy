@@ -4,6 +4,7 @@ package com.helladank.smashmyguy.game.traps
 	import com.helladank.smashmyguy.game.enemies.Enemy;
 	import flash.display.Bitmap;
 	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	import starling.display.Image;
 	import starling.textures.Texture;
 	import starling.textures.TextureSmoothing;
@@ -27,6 +28,9 @@ package com.helladank.smashmyguy.game.traps
 		private const FALL_SPEED:Number = 20;
 		private const WAIT_SPEED:Number = 1;
 		private const CHARGE_SPEED:Number = 7;
+		
+		private var _bottomLeft:Point = new Point();
+		private var _bottomRight:Point = new Point();
 		
 		public function Domp(maxY:int) 
 		{
@@ -79,6 +83,11 @@ package com.helladank.smashmyguy.game.traps
 					break;
 				
 			}
+			
+			// Update the hit points
+			_bottomLeft.y = _bottomRight.y = y + height;
+			_bottomLeft.x = x;
+			_bottomRight.x = x + width;
 		}
 		
 		public function checkCollision(enemy:Enemy):void
@@ -94,8 +103,10 @@ package com.helladank.smashmyguy.game.traps
 			// Check the bounding boxes
 			if (!enemy.bounds.intersects(this.bounds)) return;
 			
-			// The bounding boxes are intersecting, check by pixel
-			enemy.kill();
+			// The bounding boxes are intersecting, check by corner
+			var bounds:Rectangle = enemy.bounds;
+			
+			if (bounds.containsPoint(_bottomLeft) || bounds.containsPoint(_bottomRight)) enemy.kill();
 		}
 		
 		public function get IS_READY():Boolean

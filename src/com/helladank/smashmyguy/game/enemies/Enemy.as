@@ -3,6 +3,7 @@ package com.helladank.smashmyguy.game.enemies
 	import com.helladank.smashmyguy.game.Window;
 	import starling.display.MovieClip;
 	import starling.textures.Texture;
+	import starling.textures.TextureSmoothing;
 	
 	/**
 	 * ...
@@ -17,10 +18,12 @@ package com.helladank.smashmyguy.game.enemies
 		private var _alive:Boolean;
 		private var _deathTimeLeft:int = 0;
 		
-		public function Enemy(window:Window, initialX:int, finalX:int) 
+		public function Enemy(textures:Vector.<Texture>, window:Window, initialX:int, finalX:int) 
 		{
-			var texture:Vector.<Texture> = new <Texture>[Texture.fromColor(24, 16, 0xFF6600)];
-			super(texture);
+			super(textures, 4);
+			
+			play();
+			textureSmoothing = TextureSmoothing.NONE;
 			
 			_alive = true;
 			_window = window;
