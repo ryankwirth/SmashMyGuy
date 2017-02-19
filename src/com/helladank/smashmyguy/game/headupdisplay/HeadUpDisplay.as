@@ -1,30 +1,45 @@
 package com.helladank.smashmyguy.game.headupdisplay 
 {
 	import com.helladank.smashmyguy.IDestructible;
+	import com.helladank.smashmyguy.game.Game;
 	import starling.display.Sprite;
+	import starling.text.BitmapFont;
 	import starling.text.TextField;
+	import starling.text.TextFormat;
 	/**
 	 * ...
 	 * @author Alison
 	 */
 	public class HeadUpDisplay extends Sprite implements IDestructible
 	{
-		private var textField:TextField;
+		private var _game:Game;
 		
-		private var _width:int, _height:int;// , _baselineY:int;
+		private var _format:TextFormat;
+		private var _textField:TextField;
 		
-		public function HeadUpDisplay(width:int, height:int)//, baselineY:int) 
+		public function HeadUpDisplay(game:Game)
 		{
-			_width = width; _height = height; //_baselineY = baselineY;
-			
-			textField = new TextField(100, 100, "HEllo!");
-			
-			addChild(textField);
+			_game = game;
+			trace('game hud initialized');
+			_format = new TextFormat(BitmapFont.MINI, BitmapFont.NATIVE_SIZE, 0xFFFFFF, "left", "top");
+			_textField = new TextField(200, 48, "HEllo!", _format);
+			_textField.x = 10; _textField.y = 10;
+			addChild(_textField);
+		}
+		
+		public function tick():void
+		{
+			// TODO
 		}
 		
 		public function destroy():void
 		{
+			_game = null;
 			
+			removeChild(_textField);
+			_format = null;
+			
+			this.removeFromParent(true);
 		}
 		
 	}
