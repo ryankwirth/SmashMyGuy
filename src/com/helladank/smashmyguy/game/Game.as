@@ -28,8 +28,6 @@ package com.helladank.smashmyguy.game
 		
 		public function start(stageWidth:int, stageHeight:int):void
 		{
-			_hud = new HeadUpDisplay(this);
-			
 			_stageWidth = stageWidth; _stageHeight = stageHeight;
 			var wX:int = _stageWidth / 2;
 			var wY:int = _stageHeight / 2;
@@ -39,6 +37,7 @@ package com.helladank.smashmyguy.game
 			addWindow(0, wY, wX, wY);
 			addWindow(wX, wY, wX, wY);
 			
+			_hud = new HeadUpDisplay(this, _stageWidth, _stageHeight);
 			addChild(_hud);
 			addEventListener(EnterFrameEvent.ENTER_FRAME, tick);
 		}
