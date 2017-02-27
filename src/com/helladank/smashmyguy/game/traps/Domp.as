@@ -29,8 +29,7 @@ package com.helladank.smashmyguy.game.traps
 		private const WAIT_SPEED:Number = 1;
 		private const CHARGE_SPEED:Number = 7;
 		
-		private var _bottomLeft:Point = new Point();
-		private var _bottomRight:Point = new Point();
+		private var _feathering:int = 10;
 		
 		public function Domp(maxY:int) 
 		{
@@ -83,11 +82,6 @@ package com.helladank.smashmyguy.game.traps
 					break;
 				
 			}
-			
-			// Update the hit points
-			_bottomLeft.y = _bottomRight.y = y + height;
-			_bottomLeft.x = x;
-			_bottomRight.x = x + width;
 		}
 		
 		public function checkCollision(enemy:Enemy):void
@@ -95,18 +89,21 @@ package com.helladank.smashmyguy.game.traps
 			// Only check collisions when we're falling
 			if (!_status == DompStatus.DOMP_FALLING) return;
 			
-			var distX:int = Math.abs(enemy.x - this.x);
+			var distX:int = Math.abs(enemy.x + enemy.width / 2 - (this.x + this.width / 2));
 			
 			// If the enemy and this trap are far away, don't bother checking further
-			if (distX > this.width * 2) return;
+			if (distX > this.width + enemy.width) return;
 			
-			// Check the bounding boxes
-			if (!enemy.bounds.intersects(this.bounds)) return;
+			// Check the bounding boxes (minus feathering)
+			var bounds:Rectangle = this.bounds.clone();
+			bounds.width -= _feathering * 2;
+			bounds.x += _feathering;
+			if (!enemy.bounds.intersects(bounds)) return;
 			
-			// The bounding boxes are intersecting, check by corner
-			var bounds:Rectangle = enemy.bounds;
+			// The bounding boxes are intersecting, check by the amount of overlapping top edges
+			var distY:int = (this.y + this.height) - enemy.y;
 			
-			if (bounds.containsPoint(_bottomLeft) || bounds.containsPoint(_bottomRight)) enemy.kill();
+			if (distY <= 1 || distY >= 0) enemy.kill();
 		}
 		
 		public function get IS_READY():Boolean
