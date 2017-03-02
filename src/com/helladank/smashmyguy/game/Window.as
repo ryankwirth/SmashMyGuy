@@ -104,6 +104,8 @@ package com.helladank.smashmyguy.game
 			for (var i:int = 0; i < _enemies.length; i++) if (_enemies[i] == enemy) { _enemies.splice(i, 1); break; }
 		
 			Main.JUGGLER.remove(enemy);
+			
+			//decrement lives here?
 		}
 		
 		public function destroy():void

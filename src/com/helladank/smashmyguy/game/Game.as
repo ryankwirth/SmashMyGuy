@@ -13,6 +13,7 @@ package com.helladank.smashmyguy.game
 	public class Game extends Sprite
 	{
 		private var _hud:HeadUpDisplay;
+		protected var lives:int;
 		
 		public static var JUGGLER:Juggler;
 		
@@ -23,11 +24,12 @@ package com.helladank.smashmyguy.game
 		
 		public function Game() 
 		{
-			
+			lives = 5;
 		}
 		
 		public function start(stageWidth:int, stageHeight:int):void
 		{
+			//lives = 5;
 			_stageWidth = stageWidth; _stageHeight = stageHeight;
 			var wX:int = _stageWidth / 2;
 			var wY:int = _stageHeight / 2;
@@ -59,6 +61,15 @@ package com.helladank.smashmyguy.game
 		public function destry():void
 		{
 			removeEventListener(EnterFrameEvent.ENTER_FRAME, tick);
+		}
+		
+		public function getLives():int
+		{
+			return this.lives;
+		}
+		public function decrementLives():void
+		{
+			this.lives--;
 		}
 	}
 

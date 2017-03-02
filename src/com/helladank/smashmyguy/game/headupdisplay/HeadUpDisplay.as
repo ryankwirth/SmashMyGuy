@@ -17,7 +17,7 @@ package com.helladank.smashmyguy.game.headupdisplay
 		
 		private var _format:TextFormat;
 		private var _textField:TextField;
-		private var _lives:TextField;
+		private var _livesText:TextField;
 		
 		public function HeadUpDisplay(game:Game, width:int, height:int)
 		{
@@ -31,10 +31,10 @@ package com.helladank.smashmyguy.game.headupdisplay
 			_textField.y = 10;
 			addChild(_textField);
 			
-			_lives = new TextField(200, 48, "Lives: 3", _format);
-			_lives.x = _width - 100;
-			_lives.y = 10;
-			addChild(_lives);
+			_livesText = new TextField(200, 48, "Lives: "+_game.getLives(), _format);
+			_livesText.x = _width - 100;
+			_livesText.y = 10;
+			addChild(_livesText);
 		}
 		
 		public function tick():void
