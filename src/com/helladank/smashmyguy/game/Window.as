@@ -3,6 +3,7 @@ package com.helladank.smashmyguy.game
 	import com.helladank.smashmyguy.game.background.Background;
 	import com.helladank.smashmyguy.game.enemies.Enemy;
 	import com.helladank.smashmyguy.game.enemies.GenericEnemy;
+	import com.helladank.smashmyguy.game.particles.Particles;
 	import com.helladank.smashmyguy.game.traps.Domp;
 	import com.helladank.smashmyguy.game.traps.Trap;
 	import flash.events.MouseEvent;
@@ -19,6 +20,8 @@ package com.helladank.smashmyguy.game
 	{
 		private var _width:int, _height:int, _baselineY:int;
 		private var _timeToNewEnemy:int;
+		
+		private var _particles:Particles;
 		
 		private var _traps:Vector.<Trap>;
 		private var _enemies:Vector.<Enemy>;
@@ -39,7 +42,18 @@ package com.helladank.smashmyguy.game
 			_background = new Background(_width, _height, _baselineY);
 			addChild(_background);
 			
+			_particles = new Particles();
+			addChild(_particles);
+			
 			createDomp();
+		}
+		
+		/**
+		 * Rearranges the layers to keep the particles object on top of everything else.
+		 */
+		public function fixLayers():void
+		{
+			this.setChildIndex(_particles, this.numChildren - 1);
 		}
 		
 		public function createDomp():void
@@ -68,6 +82,8 @@ package com.helladank.smashmyguy.game
 			for (i = 0; i < _traps.length; i++) _traps[i].tick();
 			for (i = 0; i < _enemies.length; i++) _enemies[i].tick();
 			
+			_particles.tick();
+			
 			checkCollisions();
 		}
 		
@@ -82,8 +98,6 @@ package com.helladank.smashmyguy.game
 				{
 					enemy = _enemies[j];
 					
-					if (!enemy.IS_ALIVE) continue;
-					
 					_traps[i].checkCollision(_enemies[j]);
 				}
 			}
@@ -97,6 +111,8 @@ package com.helladank.smashmyguy.game
 			addChild(enemy);
 			
 			Main.JUGGLER.add(enemy);
+			
+			fixLayers();
 		}
 		
 		public function removeEnemy(enemy:Enemy):void
@@ -118,6 +134,20 @@ package com.helladank.smashmyguy.game
 			
 			_enemies = null;
 			_traps = null;
+			
+			removeChild(_background);
+			removeChild(_particles);
+			
+			_background.destroy();
+			_particles.destroy();
+			
+			_background = null;
+			_particles = null;
+		}
+		
+		public function get PARTICLES():Particles
+		{
+			return _particles;
 		}
 		
 	}
