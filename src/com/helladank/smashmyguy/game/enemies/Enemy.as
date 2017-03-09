@@ -1,8 +1,10 @@
 package com.helladank.smashmyguy.game.enemies 
 {
+	import com.helladank.smashmyguy.game.Game;
 	import com.helladank.smashmyguy.game.Window;
 	import starling.display.MovieClip;
 	import starling.textures.Texture;
+	import starling.textures.TextureSmoothing;
 	
 	/**
 	 * ...
@@ -10,13 +12,19 @@ package com.helladank.smashmyguy.game.enemies
 	 */
 	public class Enemy extends MovieClip
 	{
+		public static const DEATH_TIME_LEFT:int = 60;
+		
 		private var _finalX:int;
 		private var _window:Window;
+		private var _alive:Boolean;
+		private var _deathTimeLeft:int = 0;
 		
-		public function Enemy(window:Window, initialX:int, finalX:int) 
+		public function Enemy(textures:Vector.<Texture>, window:Window, initialX:int, finalX:int) 
 		{
-			var texture:Vector.<Texture> = new <Texture>[Texture.fromColor(24, 16, 0xFF6600)];
-			super(texture);
+			super(textures, 4);
+			
+			play();
+			textureSmoothing = TextureSmoothing.NONE;
 			
 			_window = window;
 			_finalX = finalX;
@@ -27,16 +35,22 @@ package com.helladank.smashmyguy.game.enemies
 		{
 			x++;
 			
-			if (x >= _finalX + width) _window.removeEnemy(this);
+			if (x >= _finalX) {
+				
+				_window.GAME.decrementLives();
+				destroy();
+			}
 		}
 		
 		public function kill():void
 		{
-			
+			_window.PARTICLES.addExplosion(x + width * 0.5, y + height * 1, 100, -4, 4, -4, 0, true);
+			destroy();
 		}
 		
 		public function destroy():void
 		{
+			_window.removeEnemy(this);
 			_window = null;
 			removeFromParent(true);
 		}

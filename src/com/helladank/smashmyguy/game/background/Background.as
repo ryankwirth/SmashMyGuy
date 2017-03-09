@@ -57,9 +57,9 @@ package com.helladank.smashmyguy.game.background
 			var i:int, j:int;
 			var tile:Image;
 			
-			for (i = 0; i < numHeight; i++)
+			for (i = -1; i < numHeight + 1; i++)
 			{
-				for (j = 0; j < numWidth; j++)
+				for (j = -1; j < numWidth + 1; j++)
 				{
 					var hasEyes:Boolean = Math.random() * 100 < 5;
 					
@@ -139,7 +139,7 @@ package com.helladank.smashmyguy.game.background
 		
 		public function fillBackdrop():void
 		{
-			_backdropFullTexture = new RenderTexture(_width, _height);
+			_backdropFullTexture = new RenderTexture(_width + 16 * 2, _height + 16 * 2);
 			
 			var backdropImage:Image = new Image(_backdropTexture);
 			backdropImage.textureSmoothing = TextureSmoothing.NONE;
@@ -160,6 +160,7 @@ package com.helladank.smashmyguy.game.background
 			
 			_backdropFullImage = new Image(_backdropFullTexture);
 			_backdropFullImage.textureSmoothing = TextureSmoothing.NONE;
+			_backdropFullImage.x = _backdropFullImage.y = -16;
 			addChild(_backdropFullImage);
 		}
 		
