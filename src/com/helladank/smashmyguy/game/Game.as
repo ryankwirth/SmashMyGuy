@@ -46,7 +46,7 @@ package com.helladank.smashmyguy.game
 		
 		private function addWindow(xPos:int, yPos:int, width:int, height:int):void
 		{
-			var window:Window = new Window(width, height);
+			var window:Window = new Window(width, height, this);
 			window.x = xPos; window.y = yPos;
 			addChild(window);
 			

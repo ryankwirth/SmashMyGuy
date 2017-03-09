@@ -4,7 +4,8 @@ package com.helladank.smashmyguy.game.headupdisplay
 	import flash.display.BitmapData;
 	import starling.display.Image;
 	import starling.textures.Texture;
-	
+	import starling.textures.TextureSmoothing;
+
 	/**
 	 * ...
 	 * @author Trevin Wong
@@ -19,6 +20,7 @@ package com.helladank.smashmyguy.game.headupdisplay
 		public function Heart() 
 		{
 			super(_texture);
+			textureSmoothing = TextureSmoothing.NONE;
 		}
 		
 	}
