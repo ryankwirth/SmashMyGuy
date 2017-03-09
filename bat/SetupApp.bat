@@ -10,7 +10,7 @@ cd %~dp0 & cd ..
 
 :: Android packaging
 set AND_CERT_NAME="SmashMyGuy"
-set AND_CERT_PASS=fd
+set AND_CERT_PASS=HDGameDevTeam
 set AND_CERT_FILE=cert\SmashMyGuy.p12
 set AND_ICONS=icons/android
 

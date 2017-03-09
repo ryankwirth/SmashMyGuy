@@ -19,8 +19,8 @@ package com.helladank.smashmyguy
 	{
 		private static var _starling:Starling;
 		
-		private var _viewPortWidth:int = 800;
-		private var _viewPortHeight:int = 480;
+		private var _viewPortWidth:int;
+		private var _viewPortHeight:int;
 		
 		public function Main() 
 		{
@@ -31,7 +31,7 @@ package com.helladank.smashmyguy
 			//Multitouch.inputMode = MultitouchInputMode.TOUCH_POINT;
 			
 			// Begin Starling
-			var viewPort:Rectangle = new Rectangle(0, 0, _viewPortWidth, _viewPortHeight);
+			var viewPort:Rectangle = new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight);
 			
 			//Starling.multitouchEnabled = true;
 			
@@ -42,8 +42,11 @@ package com.helladank.smashmyguy
 		
 		private function onRootCreated(e:Event, g:Game):void
 		{
-			//_starling.stage.stageWidth = stage.fullScreenWidth / 1;
-			//_starling.stage.stageHeight = stage.fullScreenHeight / 1;
+			_starling.stage.stageWidth = stage.fullScreenWidth / 2;
+			_starling.stage.stageHeight = stage.fullScreenHeight / 2;
+			
+			_starling.stage.stageWidth = 400;
+			_starling.stage.stageHeight = 240;
 			
 			trace("[Display] ", _starling.stage.stageWidth, _starling.stage.stageHeight);
 			

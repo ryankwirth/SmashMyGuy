@@ -1,6 +1,7 @@
 package com.helladank.smashmyguy.game.traps 
 {
 	import com.helladank.smashmyguy.IDestructible;
+	import com.helladank.smashmyguy.game.Window;
 	import com.helladank.smashmyguy.game.enemies.Enemy;
 	import flash.display.Bitmap;
 	import flash.geom.Point;
@@ -14,29 +15,31 @@ package com.helladank.smashmyguy.game.traps
 	 */
 	public class Domp extends Image implements Trap, IDestructible
 	{
-		// Embedding image for Domp
-		[Embed(source = "Domp.png")]
-		public static const Domp:Class;
-		
-		private var _texture:Texture = Texture.fromEmbeddedAsset(Domp);
-		
-		private var _status:DompStatus;
-		private var _maxY:Number;
-		private var _counter:Number;
 		private const CHARGE_TIME:Number = 5;
 		private const WAIT_TIME:Number = 5;
 		private const FALL_SPEED:Number = 20;
 		private const WAIT_SPEED:Number = 1;
 		private const CHARGE_SPEED:Number = 7;
 		
+		// Embedding image for Domp
+		[Embed(source = "Domp.png")]
+		public static const Domp:Class;
+		
+		private var _texture:Texture = Texture.fromEmbeddedAsset(Domp);
+		
+		private var _window:Window;
+		private var _status:DompStatus;
+		private var _maxY:Number;
+		private var _counter:Number;
 		private var _feathering:int = 10;
 		
-		public function Domp(maxY:int) 
+		public function Domp(window:Window, maxY:int) 
 		{
 			super(_texture);
 			
 			textureSmoothing = TextureSmoothing.NONE;
 			
+			_window = window;
 			_maxY = maxY;
 			_status = DompStatus.DOMP_READY;
 			_counter = WAIT_TIME;
@@ -59,6 +62,8 @@ package com.helladank.smashmyguy.game.traps
 						y = _maxY;
 						_counter = WAIT_TIME;
 						_status = DompStatus.DOMP_WAITING;
+						
+						_window.startShaking();
 					}
 					break;
 				case DompStatus.DOMP_CHARGING:
@@ -113,6 +118,7 @@ package com.helladank.smashmyguy.game.traps
 		
 		public function destroy():void
 		{
+			_window = null;
 			removeFromParent(true);
 		}
 		

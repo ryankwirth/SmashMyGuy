@@ -31,13 +31,13 @@ package com.helladank.smashmyguy.game
 		{
 			//lives = 5;
 			_stageWidth = stageWidth; _stageHeight = stageHeight;
-			var wX:int = _stageWidth / 2;
-			var wY:int = _stageHeight / 2;
+			var wX:int = _stageWidth;// / 2;
+			var wY:int = _stageHeight;// / 2;
 			
 			addWindow(0, 0, wX, wY);
-			addWindow(wX, 0, wX, wY);
-			addWindow(0, wY, wX, wY);
-			addWindow(wX, wY, wX, wY);
+			//addWindow(wX, 0, wX, wY);
+			//addWindow(0, wY, wX, wY);
+			//addWindow(wX, wY, wX, wY);
 			
 			_hud = new HeadUpDisplay(this, _stageWidth, _stageHeight);
 			addChild(_hud);
@@ -46,8 +46,7 @@ package com.helladank.smashmyguy.game
 		
 		private function addWindow(xPos:int, yPos:int, width:int, height:int):void
 		{
-			var window:Window = new Window(width, height);
-			window.x = xPos; window.y = yPos;
+			var window:Window = new Window(xPos, yPos, width, height);
 			addChild(window);
 			
 			_windows.push(window);

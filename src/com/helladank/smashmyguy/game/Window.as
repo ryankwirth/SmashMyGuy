@@ -18,8 +18,11 @@ package com.helladank.smashmyguy.game
 	 */
 	public class Window extends Sprite
 	{
+		public static const MAX_SHAKE_DURATION:int = 15;
+		
 		private var _width:int, _height:int, _baselineY:int;
-		private var _timeToNewEnemy:int;
+		private var _timeToNewEnemy:int, _shakeDuration:int;
+		private var _originalX:int, _originalY:int;
 		
 		private var _particles:Particles;
 		
@@ -28,10 +31,13 @@ package com.helladank.smashmyguy.game
 		
 		private var _background:Background;
 		
-		public function Window(width:int, height:int) 
+		public function Window(xPos:int, yPos:int, width:int, height:int) 
 		{
 			_width = width; _height = height; _baselineY = Math.ceil((height * 0.75) / 16) * 16;
 			_timeToNewEnemy = Math.random() * 60;
+			_shakeDuration = 0;
+			x = _originalX = xPos;
+			y = _originalY = yPos;
 			
 			_traps = new Vector.<Trap>();
 			_enemies = new Vector.<Enemy>();
@@ -56,9 +62,14 @@ package com.helladank.smashmyguy.game
 			this.setChildIndex(_particles, this.numChildren - 1);
 		}
 		
+		public function startShaking():void
+		{
+			_shakeDuration = MAX_SHAKE_DURATION;
+		}
+		
 		public function createDomp():void
 		{
-			var domp:Domp = new Domp(_baselineY - 79);
+			var domp:Domp = new Domp(this, _baselineY - 79);
 			domp.x = width / 2 - domp.width / 2;
 			_traps.push(domp);
 			addChild(domp);
@@ -72,6 +83,13 @@ package com.helladank.smashmyguy.game
 		
 		public function tick(e:EnterFrameEvent):void
 		{
+			if (_shakeDuration > 0)
+			{
+				_shakeDuration--;
+				x = _originalX + (Math.random() - 0.5) * 10 * (_shakeDuration / MAX_SHAKE_DURATION);
+				y = _originalY + (Math.random() - 0.5) * 10 * (_shakeDuration / MAX_SHAKE_DURATION);
+			} else { x = _originalX; y = _originalY; }
+			
 			if (_timeToNewEnemy <= 0)
 			{
 				_timeToNewEnemy = Math.floor(Math.random() * 300) + 60;
