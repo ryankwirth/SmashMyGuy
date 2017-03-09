@@ -20,6 +20,7 @@ package com.helladank.smashmyguy.game
 	{
 		public static const MAX_SHAKE_DURATION:int = 15;
 		
+		private var _game:Game;
 		private var _width:int, _height:int, _baselineY:int;
 		private var _timeToNewEnemy:int, _shakeDuration:int;
 		private var _originalX:int, _originalY:int;
@@ -31,8 +32,9 @@ package com.helladank.smashmyguy.game
 		
 		private var _background:Background;
 		
-		public function Window(xPos:int, yPos:int, width:int, height:int) 
+		public function Window(xPos:int, yPos:int, width:int, height:int, game:Game)
 		{
+			_game = game;
 			_width = width; _height = height; _baselineY = Math.ceil((height * 0.75) / 16) * 16;
 			_timeToNewEnemy = Math.random() * 60;
 			_shakeDuration = 0;
@@ -138,8 +140,6 @@ package com.helladank.smashmyguy.game
 			for (var i:int = 0; i < _enemies.length; i++) if (_enemies[i] == enemy) { _enemies.splice(i, 1); break; }
 		
 			Main.JUGGLER.remove(enemy);
-			
-			//decrement lives here?
 		}
 		
 		public function destroy():void
@@ -166,6 +166,11 @@ package com.helladank.smashmyguy.game
 		public function get PARTICLES():Particles
 		{
 			return _particles;
+		}
+		
+		public function get GAME():Game
+		{
+			return _game;
 		}
 		
 	}

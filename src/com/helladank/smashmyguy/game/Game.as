@@ -46,7 +46,7 @@ package com.helladank.smashmyguy.game
 		
 		private function addWindow(xPos:int, yPos:int, width:int, height:int):void
 		{
-			var window:Window = new Window(xPos, yPos, width, height);
+			var window:Window = new Window(xPos, yPos, width, height, this);
 			addChild(window);
 			
 			_windows.push(window);
@@ -57,7 +57,7 @@ package com.helladank.smashmyguy.game
 			_hud.tick();
 		}
 		
-		public function destry():void
+		public function destroy():void
 		{
 			removeEventListener(EnterFrameEvent.ENTER_FRAME, tick);
 		}

@@ -18,9 +18,12 @@ package com.helladank.smashmyguy.game.headupdisplay
 		private var _format:TextFormat;
 		private var _textField:TextField;
 		private var _livesText:TextField;
+		
+		private var _hearts:Vector.<Heart>;
 				
 		public function HeadUpDisplay(game:Game, width:int, height:int)
 		{
+			_hearts = new Vector.<Heart>();
 			_game = game;
 			_width = width; _height = height;
 			trace('game hud initialized');
@@ -33,6 +36,7 @@ package com.helladank.smashmyguy.game.headupdisplay
 			
 			for (var i : int = 0; i < _game.getLives(); i++) {
 				var heart:Heart = new Heart();
+				_hearts.push(heart);
 				heart.x = 80 + (25 * i);
 				heart.y = height - 33;
 				addChild(heart);
@@ -41,7 +45,13 @@ package com.helladank.smashmyguy.game.headupdisplay
 		
 		public function tick():void
 		{
-			
+			for (var i : int = 0; i < _hearts.length; i++) {
+				if (i <= _game.getLives()) {
+					_hearts[i].visible = true;
+				} else {
+					_hearts[i].visible = false;
+				}
+			}
 		}
 		
 		public function destroy():void
