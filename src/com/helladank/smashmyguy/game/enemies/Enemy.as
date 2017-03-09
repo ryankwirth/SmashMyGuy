@@ -16,7 +16,6 @@ package com.helladank.smashmyguy.game.enemies
 		
 		private var _finalX:int;
 		private var _window:Window;
-		private var _game:Game;
 		private var _alive:Boolean;
 		private var _deathTimeLeft:int = 0;
 		
@@ -27,7 +26,6 @@ package com.helladank.smashmyguy.game.enemies
 			play();
 			textureSmoothing = TextureSmoothing.NONE;
 			
-			_alive = true;
 			_window = window;
 			_finalX = finalX;
 			x = initialX;
@@ -35,13 +33,6 @@ package com.helladank.smashmyguy.game.enemies
 		
 		public function tick():void
 		{
-			if (!_alive)
-			{
-				if (_deathTimeLeft <= 0) destroy();
-				else _deathTimeLeft--;
-				return;
-			}
-			
 			x++;
 			
 			if (x >= _finalX + width) {
@@ -51,8 +42,8 @@ package com.helladank.smashmyguy.game.enemies
 		
 		public function kill():void
 		{
-			_alive = false;
-			_deathTimeLeft = DEATH_TIME_LEFT;
+			_window.PARTICLES.addExplosion(x + width * 0.5, y + height * 1, 100, -4, 4, -4, 0, true);
+			destroy();
 		}
 		
 		public function destroy():void
@@ -60,11 +51,6 @@ package com.helladank.smashmyguy.game.enemies
 			_window.removeEnemy(this);
 			_window = null;
 			removeFromParent(true);
-		}
-		
-		public function get IS_ALIVE():Boolean
-		{
-			return _alive;
 		}
 	}
 	
