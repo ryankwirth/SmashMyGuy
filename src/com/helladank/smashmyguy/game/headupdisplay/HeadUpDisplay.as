@@ -18,7 +18,7 @@ package com.helladank.smashmyguy.game.headupdisplay
 		private var _format:TextFormat;
 		private var _textField:TextField;
 		private var _livesText:TextField;
-		
+				
 		public function HeadUpDisplay(game:Game, width:int, height:int)
 		{
 			_game = game;
@@ -26,20 +26,22 @@ package com.helladank.smashmyguy.game.headupdisplay
 			trace('game hud initialized');
 			_format = new TextFormat(BitmapFont.MINI, BitmapFont.NATIVE_SIZE*2, 0xFFFFFF, "left", "top");
 			
-			_textField = new TextField(200, 48, "HEllo!", _format);
-			_textField.x = 10;
-			_textField.y = 10;
-			addChild(_textField);
-			
-			_livesText = new TextField(200, 48, "Lives: "+_game.getLives(), _format);
-			_livesText.x = _width - 100;
-			_livesText.y = 10;
+			_livesText = new TextField(200, 48, "Lives: ", _format);
+			_livesText.x = 20;
+			_livesText.y = _height - 30;
 			addChild(_livesText);
+			
+			for (var i : int = 0; i < _game.getLives(); i++) {
+				var heart:Heart = new Heart();
+				heart.x = 80 + (25 * i);
+				heart.y = height - 33;
+				addChild(heart);
+			}
 		}
 		
 		public function tick():void
 		{
-			// TODO
+			
 		}
 		
 		public function destroy():void
