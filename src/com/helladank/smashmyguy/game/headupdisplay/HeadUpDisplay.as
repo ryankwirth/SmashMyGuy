@@ -46,7 +46,7 @@ package com.helladank.smashmyguy.game.headupdisplay
 		public function tick():void
 		{
 			for (var i : int = 0; i < _hearts.length; i++) {
-				if (i <= _game.getLives()) {
+				if (i < _game.getLives()) {
 					_hearts[i].visible = true;
 				} else {
 					_hearts[i].visible = false;
