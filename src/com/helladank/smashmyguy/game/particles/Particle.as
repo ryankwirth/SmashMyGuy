@@ -19,10 +19,13 @@ package com.helladank.smashmyguy.game.particles
 		private var _lifespan:int;
 		private var _gravity:Boolean;
 		
-		public function Particle(xPos:int, yPos:int, xVel:Number, yVel:Number, gravity:Boolean, lifespan:int) 
+		public function Particle() 
 		{
 			super(TEXTURE);
-			
+		}
+		
+		public function configure(xPos:int, yPos:int, xVel:Number, yVel:Number, gravity:Boolean, lifespan:int):void
+		{
 			_gravity = gravity;
 			_lifespan = lifespan;
 			_xVel = xVel;
@@ -40,7 +43,7 @@ package com.helladank.smashmyguy.game.particles
 			this.x += _xVel;
 			this.y += _yVel;
 			
-			_xVel *= 0.95;
+			_xVel *= 0.98;
 			_yVel *= 0.95;
 			
 			if (_gravity) 
