@@ -3,9 +3,6 @@ package com.helladank.smashmyguy.game.traps
 	import com.helladank.smashmyguy.IDestructible;
 	import com.helladank.smashmyguy.game.Window;
 	import com.helladank.smashmyguy.game.enemies.Enemy;
-	import flash.display.Bitmap;
-	import flash.geom.Point;
-	import flash.geom.Rectangle;
 	import starling.display.Image;
 	import starling.textures.Texture;
 	import starling.textures.TextureSmoothing;
@@ -92,28 +89,26 @@ package com.helladank.smashmyguy.game.traps
 		public function checkCollision(enemy:Enemy):void
 		{
 			// Only check collisions when we're falling
-			if (!_status == DompStatus.DOMP_FALLING) return;
+			if (!IS_FALLING) return;
 			
-			var distX:int = Math.abs(enemy.x + enemy.width / 2 - (this.x + this.width / 2));
-			
-			// If the enemy and this trap are far away, don't bother checking further
-			if (distX > this.width + enemy.width) return;
-			
-			// Check the bounding boxes (minus feathering)
-			var bounds:Rectangle = this.bounds.clone();
-			bounds.width -= _feathering * 2;
-			bounds.x += _feathering;
-			if (!enemy.bounds.intersects(bounds)) return;
+			// Check for overlapping widths (less feathering)
+			if (enemy.x + enemy.width < this.x + _feathering) return;
+			else if (enemy.x > this.x + this.width - _feathering) return;
 			
 			// The bounding boxes are intersecting, check by the amount of overlapping top edges
 			var distY:int = (this.y + this.height) - enemy.y;
 			
-			if (distY <= 1 || distY >= 0) enemy.kill();
+			if (distY >= 0) enemy.kill();
 		}
 		
 		public function get IS_READY():Boolean
 		{
 			return _status == DompStatus.DOMP_READY;
+		}
+		
+		public function get IS_FALLING():Boolean
+		{
+			return _status == DompStatus.DOMP_FALLING;
 		}
 		
 		public function destroy():void

@@ -17,6 +17,11 @@ package com.helladank.smashmyguy.game.traps
 			_type = type;
 		}
 		
+		public function toString():String
+		{
+			return _type;
+		}
+		
 	}
 
 }
