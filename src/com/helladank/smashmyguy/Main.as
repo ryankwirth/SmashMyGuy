@@ -45,8 +45,7 @@ package com.helladank.smashmyguy
 			_starling.stage.stageWidth = stage.fullScreenWidth / 2;
 			_starling.stage.stageHeight = stage.fullScreenHeight / 2;
 			
-			_starling.stage.stageWidth = 400;
-			_starling.stage.stageHeight = 240;
+		
 			
 			trace("[Display] ", _starling.stage.stageWidth, _starling.stage.stageHeight);
 			

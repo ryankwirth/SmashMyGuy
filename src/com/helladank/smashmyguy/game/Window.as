@@ -94,7 +94,7 @@ package com.helladank.smashmyguy.game
 			
 			if (_timeToNewEnemy <= 0)
 			{
-				_timeToNewEnemy = Math.floor(Math.random() * 300) + 60;
+				_timeToNewEnemy = (Math.floor(Math.random() * 300))/(_game.getLevel()) + 60;
 				addEnemy();
 			} else _timeToNewEnemy--;
 			

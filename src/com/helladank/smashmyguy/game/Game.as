@@ -13,7 +13,10 @@ package com.helladank.smashmyguy.game
 	public class Game extends Sprite
 	{
 		private var _hud:HeadUpDisplay;
-		protected var lives:int;
+		private var _lives:int;
+		private var _currentKills:int;
+		private var _killsToNextLevel:int;
+		private var _level:int;
 		
 		public static var JUGGLER:Juggler;
 		
@@ -24,7 +27,10 @@ package com.helladank.smashmyguy.game
 		
 		public function Game() 
 		{
-			lives = 5;
+			_lives = 5;
+			_currentKills = 0;
+			_killsToNextLevel = 2;
+			_level = 1;
 		}
 		
 		public function start(stageWidth:int, stageHeight:int):void
@@ -64,11 +70,52 @@ package com.helladank.smashmyguy.game
 		
 		public function getLives():int
 		{
-			return this.lives;
+			return this._lives;
 		}
+		
 		public function decrementLives():void
 		{
-			this.lives--;
+			this._lives--;
+		}
+		
+		public function getLevel():int
+		{
+			return this._level;
+		}
+		
+		public function incrementLevel():void
+		{
+			this._level++;
+		}
+		
+		public function getCurrentKills():int
+		{
+			return this._currentKills;
+		}
+		
+		public function incrementCurrentKills():void
+		{
+			this._currentKills++;
+		}
+		
+		public function getKillsToNextLevel():int
+		{
+			return _killsToNextLevel;
+		}
+		
+		public function setKillsToNextLevel(i:int):void
+		{
+			this._killsToNextLevel = i;
+		}
+		
+		public function getHeight():int
+		{
+			return _stageHeight;
+		}
+		
+		public function getWidth():int
+		{
+			return _stageWidth;
 		}
 	}
 

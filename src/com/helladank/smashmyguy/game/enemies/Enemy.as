@@ -33,10 +33,9 @@ package com.helladank.smashmyguy.game.enemies
 		
 		public function tick():void
 		{
-			x++;
+			x += _window.GAME.getLevel();
 			
 			if (x >= _finalX) {
-				
 				_window.GAME.decrementLives();
 				destroy();
 			}
@@ -44,6 +43,13 @@ package com.helladank.smashmyguy.game.enemies
 		
 		public function kill():void
 		{
+			_window.GAME.incrementCurrentKills();
+			
+			if (_window.GAME.getKillsToNextLevel() == _window.GAME.getCurrentKills()) {
+				_window.GAME.setKillsToNextLevel(_window.GAME.getKillsToNextLevel() + 2);
+				_window.GAME.incrementLevel();
+			}
+	
 			_window.PARTICLES.addExplosion(x + width * 0.5, y + height * 1, 100, -4, 4, -4, 0, true);
 			destroy();
 		}
